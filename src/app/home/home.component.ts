@@ -16,14 +16,18 @@ export class HomeComponent implements OnInit {
   data;
 
   ngOnInit() {
-    this.options = {
+      this.options = {
       chart: {
         type: 'pieChart',
         height: 450,
         donut: true,
-        x: function(d){return d.key;},
-        y: function(d){return d.y;},
+        x: function(d){return d.label;},
+        y: function(d){return d.value;},
         showLabels: true,
+        showValues: true,
+        valueFormat: function(d){
+          return d3.format(',.0f')(d) + ' months';
+        },
         pie: {
           startAngle: function(d) { return d.startAngle/2 -Math.PI/2 },
           endAngle: function(d) { return d.endAngle/2 -Math.PI/2 }
@@ -41,25 +45,20 @@ export class HomeComponent implements OnInit {
     };
     this.data = [
       {
-        key: "Cumulative Return",
-        values: [
-          {
-            "label" : "JavaScript" ,
-            "value" : 50
-          } ,
-          {
-            "label" : "PHP" ,
-            "value" : 30
-          } ,
-          {
-            "label" : "HTML5/CSS3" ,
-            "value" : 80
-          } ,
-          {
-            "label" : "NodeJS" ,
-            "value" : 12
-          }
-        ]
+        "label" : "JavaScript" ,
+        "value" : 50
+      } ,
+      {
+        "label" : "PHP" ,
+        "value" : 30
+      } ,
+      {
+        "label" : "HTML5/CSS3" ,
+        "value" : 80
+      } ,
+      {
+        "label" : "NodeJS" ,
+        "value" : 12
       }
     ];
   }
